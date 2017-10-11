@@ -1,0 +1,17 @@
+[Unit]
+Description=odoo 11
+After=syslog.target network.target
+
+[Service]
+Type=simple
+User=odoo
+Group=odoo
+# This line connects the odoo server to the Xvfb virtual display and allows wkhtmltopdf to work
+# Environment="DISPLAY=:0" "PYTHONPATH=/usr/local/lib/python3.5/dist-packages/:$PYTHONPATH"
+ExecStart=/opt/odoo/odoo11/odoo-bin -c /etc/odoo/odoo11.conf
+
+# Give a reasonable amount of time for the server to start up/shut down
+TimeoutSec=120
+
+[Install]
+WantedBy=multi-user.target
