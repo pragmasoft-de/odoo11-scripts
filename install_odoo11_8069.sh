@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Script to install odoo 11 on Ubuntu Server 16.04 LTS.
-# (c) Josef Kaser 2016 - 2017
+# (c) Josef Kaser 2016 - 2018
 # http://www.pragmasoft.de
 #
 # odoo will be listening on port 8069 on the external IP
@@ -59,7 +59,7 @@ apt-get install python3.5 python3-dev python-pychart python3-gnupg python3-pil p
 apt-get install postgresql postgresql-client postgresql-client-common postgresql-contrib postgresql-server-dev-all -y
 
 # create database user "odoo"
-/usr/bin/sudo -u $PG_USER_NAME ./create_pg_role.sh $PG_ROLE_ODOO_NAME $PG_ROLE_ODOO_PWD
+su $PG_USER_NAME /usr/bin/psql -c "create role $PG_ROLE_ODOO_NAME with CREATEROLE CREATEDB LOGIN password '$PG_ROLE_ODOO_PWD';"
 
 # install required Python modules
 pip3 install --upgrade pip
